@@ -1,97 +1,78 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>The Bear Necessities</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #1a1a1a;
-        color: #fff;
-      }
-      h1 {
-        text-align: center;
-        margin-top: 50px;
-        color: #8cffa9;
-      }
-      .form-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 30px;
-      }
-      .form-container label {
-        font-size: 20px;
-        color: #8cffa9;
-        margin-bottom: 10px;
-      }
-      .form-container input[type=text] {
-        padding: 10px;
-        font-size: 16px;
-        border-radius: 5px;
-        border: none;
-        margin-bottom: 20px;
-        background-color: #333;
-        color: #fff;
-      }
-      .form-container input[type=text]:focus {
-        outline: none;
-        box-shadow: 0 0 0 2px #8cffa9;
-      }
-      .form-container button {
-        background-color: #8cffa9;
-        color: #000;
-        padding: 10px 20px;
-        font-size: 16px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      .form-container button:hover {
-        background-color: #00ffa6;
-      }
-      .image-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
-      }
-      .image-container img {
-        max-width: 100%;
-        max-height: 400px;
-        border: 1px solid #8cffa9;
-        cursor: pointer;
-      }
-      .image-container img:hover {
-        border: 1px solid #00ffa6;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>The Bear Necessities</h1>
-    <div class="form-container">
-      <form>
-        <label for="item-number">Enter an item number (1-333):</label>
-        <input type="text" id="item-number" name="item-number" placeholder="e.g. 1">
-        <button type="button" onclick="showImage()">Show Image</button>
-      </form>
+<head>
+  <title>Treasure Hunt</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: "Consolas", sans-serif;
+      font-size: 16px;
+    }
+    
+    .container {
+      width: 400px;
+      margin: 0 auto;
+    }
+    
+    .header {
+      text-align: center;
+    }
+    
+    .clue {
+      margin-bottom: 10px;
+    }
+    
+    .input {
+      width: 200px;
+    }
+    
+    .button {
+      background-color: green;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Treasure Hunt</h1>
     </div>
-    <div class="image-container">
-      <img id="item-image" src="Images/1.png" alt="Item Image">
-      <img id="item-image-2" src="Images/2.png" alt="Item Image">
+    
+    <div class="clue">
+      Enter the clue to reveal the treasure!
     </div>
-    <script>
-      function showImage() {
-        const itemNumber = parseInt(document.getElementById("item-number").value);
-        if (isNaN(itemNumber) || itemNumber < 1 || itemNumber > 333) {
-          alert("Please enter a valid item number between 1 and 333.");
-          return;
-        }
-        const image = document.getElementById("item-image");
-        image.src = `bears/${itemNumber}.png`;
-        const image2 = document.getElementById("item-image-2");
-        image2.src = `Images/${itemNumber + 1}.png`;
+    
+    <input type="text" class="input" id="clue">
+    
+    <button id="submit">Submit</button>
+    
+    <div id="result"></div>
+  </div>
+  
+  <script>
+    var clues = [
+      "The treasure is hidden in the forest",
+      "The treasure is buried under a tree",
+      "The treasure is guarded by a dragon"
+    ];
+    
+    var currentClue = 0;
+    
+    var submitHandler = function() {
+      var clue = document.getElementById("clue").value;
+    
+      if (clues[currentClue] === clue) {
+        document.getElementById("result").innerHTML = "Congratulations! You found the treasure!";
+        document.getElementById("submit").disabled = true;
+      } else {
+        document.getElementById("result").innerHTML = "Sorry, that's not the right clue. Try again!";
       }
-    </script>
-  </body>
+    };
+    
+    document.getElementById("submit").addEventListener("click", submitHandler);
+  </script>
+</body>
 </html>
